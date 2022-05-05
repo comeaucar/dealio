@@ -1,0 +1,7 @@
+{
+  "name": "Dealio",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
