@@ -1,0 +1,33 @@
+<!--<div>
+  <div class="scrolling-wrapper">
+    <ion-card class="card ion-activatable ripple-parent" *ngFor="let d of days" (click)="cardTouched(d)">
+      <ion-card-header>
+        <ion-card-subtitle>{{d}}</ion-card-subtitle>
+        <ion-card-title>{{d}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{d}}
+      </ion-card-content>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card>
+  </div>
+</div>-->
+
+<div style="margin-top: 20px;">
+<swiper #swiper class="mySwiper" 
+[pagination]="{type: 'progressbar'}"
+[navigation]="true"
+[rewind]="true"
+(slideChange)="onSlideChange()"
+[initialSlide]="initialSlide"
+>
+  <ng-template swiperSlide *ngFor="let d of days">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{d}}</ion-card-title>
+        <ion-card-subtitle>6 deals today</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
+</swiper>
+</div>
