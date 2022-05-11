@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DealsPage } from './deals/deals.page';
+import { UserService } from './services/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,5 +12,7 @@ export class AppComponent {
     { title: 'Account', url: '/folder/Account', icon: 'person' },
     { title: 'Settings', url: '/folder/Settings', icon: 'cog' },
   ];
-  constructor() {}
+  constructor(private signInService: UserService) {
+   signInService.SIGN_IN("cartercomeau29@icloud.com", "daisy1")
+  }
 }

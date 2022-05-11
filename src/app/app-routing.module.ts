@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DealsPage } from './deals/deals.page';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Deals',
+    redirectTo: 'sign-in',
     pathMatch: 'full',
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'sign-in',
@@ -18,11 +19,13 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'folder/Deals',
-    loadChildren: () => import('./deals/deals.module').then( m => m.DealsPageModule)
+    loadChildren: () => import('./deals/deals.module').then(m => m.DealsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'sign-up',

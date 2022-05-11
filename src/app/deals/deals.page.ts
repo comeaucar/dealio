@@ -12,7 +12,7 @@ SwiperCore.use([Pagination, Navigation, EffectCube]);
 })
 export class DealsPage implements OnInit {
   days: any;
-  initialSlide = 6;
+  initialSlide = 3;
 
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
 
