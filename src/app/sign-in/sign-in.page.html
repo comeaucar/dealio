@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" [color]="primary">
-  <ion-card style="margin-top: 20%;" [color]="primary">
+  <ion-card [color]="primary">
     <ion-card-header>
       <ion-card-title>Sign In</ion-card-title>
     </ion-card-header>
@@ -28,9 +28,27 @@
         <ion-card-title>
           Don't have an account?
         </ion-card-title>
+        <ion-card-subtitle>
+          Create one for free
+        </ion-card-subtitle>
       </ion-card-header>
     <ion-card-content>
     <ion-button expand="block" color="secondary" [routerLink]="['/sign-up']">Sign Up</ion-button>
+  </ion-card-content>
+  </ion-card>
+  </div> 
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Managers
+        </ion-card-title>
+        <ion-card-subtitle>
+          Add your Restaurant to Dealio
+        </ion-card-subtitle>
+      </ion-card-header>
+    <ion-card-content>
+    <ion-button expand="block" color="dark" [routerLink]="['/sign-up']">Register</ion-button>
   </ion-card-content>
   </ion-card>
   </div> 

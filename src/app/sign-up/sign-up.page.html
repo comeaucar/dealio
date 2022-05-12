@@ -1,9 +1,89 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>sign-up</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 30px">Dealio</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true" [color]="primary">
+  <ion-card [color]="primary">
+    <ion-card-header>
+      <ion-card-title>Sign Up</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form style="margin-top: 10%" [formGroup]="signUpForm">
+        <ion-item>
+          <ion-label position="stacked">First Name <ion-chip *ngIf="(signUpFormControl.firstname.touched || submitted) && signUpFormControl.firstname.errors?.required" color="danger"
+            >Invalid First Name</ion-chip
+          ></ion-label>
+          <ion-input
+            type="text"
+            formControlName="firstname"
+            required="true"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Last Name  <ion-chip *ngIf="(signUpFormControl.lastname.touched || submitted) && signUpFormControl.lastname.errors?.required" color="danger"
+            >Invalid Last Name</ion-chip></ion-label>
+          <ion-input
+            type="text"
+            formControlName="lastname"
+            required="true"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"
+            >Email
+            <ion-chip *ngIf="(signUpFormControl.email.touched || submitted) && signUpFormControl.email.errors?.required" color="danger"
+              >Invalid Email</ion-chip
+            ><ion-chip *ngIf="invalidEmail === true" color="danger"
+              >Email Taken</ion-chip
+            >
+            <ion-chip *ngIf="signUpFormControl.email.touched && signUpFormControl.email.errors?.pattern"  color="danger"
+              >Incorrect Email Format</ion-chip
+            >
+            </ion-label
+          >
+          <ion-input
+            id="email"
+            type="email"
+            formControlName="email"
+            required="true"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Password  <ion-chip *ngIf="(signUpFormControl.password.touched || submitted) && signUpFormControl.password.errors?.required" color="danger"
+            >Invalid Password</ion-chip>
+          </ion-label>
+          <ion-input
+            type="password"
+            formControlName="password"
+            required="true"
+          ></ion-input>
+        </ion-item>
+        <ion-chip *ngIf="signUpFormControl.password.touched && signUpFormControl.password.errors?.pattern" color="danger"
+            >Password requirement is 6 characters long, 1 uppercase, 1 number, @#$& characters allowed</ion-chip>
+        <ion-item>
+          <ion-label position="stacked">Date of Birth</ion-label>
+          <ion-datetime
+            value="{{currDate}}"
+            min="{{minYear}}"
+            max="{{maxYear}}"
+            presentation="date"
+            formControlName="dob"
+            required="true"
+          ></ion-datetime>
+        </ion-item>
+        <ion-button
+          style="margin-top: 15px"
+          type="submit"
+          expand="block"
+          (click)="signUpSubmit()"
+          >Sign Up</ion-button
+        >
+      </form>
+      <ion-spinner *ngIf="submitted" style="display: block; margin: auto;" name="crescent"></ion-spinner>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
