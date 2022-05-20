@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Storage } from '@capacitor/storage';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,10 +19,12 @@ export class SignInPage implements OnInit {
   signInForm: FormGroup;
   userInfo: any;
   tokenResult: any;
+  loading$ = this.loader.loading$
   constructor(
     public formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public loader: LoadingService
   ) {}
 
   ngOnInit() {

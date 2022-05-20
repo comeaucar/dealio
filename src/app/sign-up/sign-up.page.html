@@ -83,7 +83,7 @@
           >Sign Up</ion-button
         >
       </form>
-      <ion-spinner *ngIf="submitted" style="display: block; margin: auto;" name="crescent"></ion-spinner>
+      <ion-spinner *ngIf="loading$ | async" style="display: block; margin: auto;" name="crescent"></ion-spinner>
     </ion-card-content>
   </ion-card>
 </ion-content>

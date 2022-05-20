@@ -1,0 +1,156 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size: 30px">Dealio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="registered == false">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Register an account</ion-card-title>
+      <ion-card-subtitle style="margin-top: 10px;">
+        These will be your credentials for signing in to Dealio
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="register_account_form">
+        <ion-item>
+          <ion-label position="stacked">
+            Email <ion-chip *ngIf="(registerAccFormControl.email.touched || submitted) && registerAccFormControl.email.errors?.required" color="danger"
+            >Email Required</ion-chip
+          ><ion-chip *ngIf="invalidEmail === true" color="danger"
+            >Email Taken</ion-chip
+          >
+          <ion-chip *ngIf="registerAccFormControl.email.touched && registerAccFormControl.email.errors?.pattern"  color="danger"
+            >Incorrect Email Format</ion-chip
+          >
+          </ion-label>
+          <ion-input type="text"
+          formControlName="email"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Password <ion-chip *ngIf="(registerAccFormControl.password.touched || submitted) && registerAccFormControl.password.errors?.required" color="danger"
+            >Password Required</ion-chip>
+          </ion-label>
+          <ion-input type="password"
+          formControlName="password"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-chip style="padding-top: 20px; padding-bottom: 20px;" *ngIf="registerAccFormControl.password.touched && registerAccFormControl.password.errors?.pattern" color="danger"
+            >Password requirement is 6 characters long, 1 uppercase, 1 number, @#$& characters allowed</ion-chip>
+            <ion-button
+            style="margin-top: 15px"
+            type="submit"
+            expand="block"
+            (click)="registerAccSubmit()"
+            >Register</ion-button
+          >
+      </form>
+      <ion-spinner *ngIf="loading$ | async" style="display: block; margin: auto;" name="crescent"></ion-spinner>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
+
+<ion-content *ngIf="registered == true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Register Establishment
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="register_est_form">
+        <ion-item>
+          <ion-label position="stacked">
+            Name <ion-chip *ngIf="(registerEstFormControl.name.touched || submitted) && registerEstFormControl.name.errors?.required" color="danger"
+            >Name Required</ion-chip>
+          </ion-label>
+          <ion-input type="text"
+          formControlName="name"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Address <ion-chip *ngIf="(registerEstFormControl.address.touched || submitted) && registerEstFormControl.address.errors?.required" color="danger"
+            >Address Required</ion-chip>
+          </ion-label>
+          <ion-input type="text"
+          formControlName="address"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Address 2
+          </ion-label>
+          <ion-input type="text"
+          formControlName="address_2"
+          placeholder="Apartment, suite, dorm, etc.(optional)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            City <ion-chip *ngIf="(registerEstFormControl.city.touched || submitted) && registerEstFormControl.city.errors?.required" color="danger"
+            >City Required</ion-chip>
+          </ion-label>
+          <ion-input type="text"
+          formControlName="city"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Province/Territory <ion-chip *ngIf="(registerEstFormControl.province_state.touched || submitted) && registerEstFormControl.province_state.errors?.required" color="danger"
+            >Province Required</ion-chip>
+          </ion-label>
+          <ion-select 
+          formControlName="province_state"
+          required="true">
+          <ion-select-option *ngFor="let province of provinces">{{province}}</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Country <ion-chip *ngIf="(registerEstFormControl.country.touched || submitted) && registerEstFormControl.country.errors?.required" color="danger"
+            >Country Required</ion-chip>
+          </ion-label>
+          <ion-select
+          formControlName="country"
+          required="true">
+          <ion-select-option *ngFor="let country of countries">{{country}}</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Phone <ion-chip *ngIf="(registerEstFormControl.phone.touched || submitted) && registerEstFormControl.phone.errors?.required" color="danger"
+            >Phone Required</ion-chip>
+          </ion-label>
+          <ion-input type="text"
+          formControlName="phone"
+          required="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">
+            Type <ion-chip *ngIf="(registerEstFormControl.type.touched || submitted) && registerEstFormControl.type.errors?.required" color="danger"
+            >Type Required</ion-chip>
+          </ion-label>
+          <ion-select
+          formControlName="type"
+          required="true"><ion-select-option *ngFor="let type of types">{{type}}</ion-select-option></ion-select>
+        </ion-item>
+        <ion-button
+          style="margin-top: 15px"
+          type="submit"
+          expand="block"
+          (click)="registerSubmit()"
+          >Register</ion-button
+        >
+      </form>
+      <ion-spinner *ngIf="loading$ | async" style="display: block; margin: auto;" name="crescent"></ion-spinner>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

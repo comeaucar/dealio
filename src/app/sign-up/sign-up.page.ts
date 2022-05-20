@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Storage } from '@capacitor/storage';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,11 +22,13 @@ export class SignUpPage implements OnInit {
   signUpForm: FormGroup;
   response: any;
   submitted = false;
+  loading$ = this.loader.loading$
   invalidEmail: boolean = false;
   constructor(
     public formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public loader: LoadingService
   ) {
     var today = new Date();
     this.maxYear = today.getFullYear() - 14;
