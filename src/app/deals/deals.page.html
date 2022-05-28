@@ -14,6 +14,12 @@
 </div>-->
 
 <div style="margin-top: 20px;">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+    pullingIcon = 'chevron-down-circle-outline'
+    refreshingSpinner = 'circles'
+    ></ion-refresher-content>
+  </ion-refresher>
 <swiper #swiper class="mySwiper" 
 [pagination]="{type: 'progressbar'}"
 [navigation]="true"
@@ -29,5 +35,37 @@
       </ion-card-header>
     </ion-card>
   </ng-template>
+ 
 </swiper>
+
+<div *ngIf="currIndex == 1">
+    <ion-item *ngFor="let deal of monDeals">
+      <ion-thumbnail>
+        <img src="https://picsum.photos/100" />
+      </ion-thumbnail>
+      <ion-card style="width: 100%;">
+        <ion-card-header>
+          <ion-card-title>Deal Today</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Checkout this amaazing deal
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+</div>
+<div *ngIf="currIndex == 2">
+  <ion-item *ngFor="let deal of tueDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>Deal Today {{deal}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Checkout this amaazing deal
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
 </div>
