@@ -31,12 +31,14 @@
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{d}}</ion-card-title>
-        <ion-card-subtitle>6 deals today</ion-card-subtitle>
+        <ion-card-subtitle>{{currNumDeals}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </ng-template>
  
 </swiper>
+
+<ion-spinner *ngIf="loading$ | async" style="display: block; margin: auto;" name="crescent"></ion-spinner>
 
 <div *ngIf="currIndex == 1">
     <ion-item *ngFor="let deal of monDeals">
@@ -45,10 +47,12 @@
       </ion-thumbnail>
       <ion-card style="width: 100%;">
         <ion-card-header>
-          <ion-card-title>Deal Today</ion-card-title>
+          <ion-card-title>{{deal.title}}</ion-card-title>
+          <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          Checkout this amaazing deal
+          {{deal.description}}
         </ion-card-content>
       </ion-card>
     </ion-item>
@@ -60,10 +64,97 @@
     </ion-thumbnail>
     <ion-card style="width: 100%;">
       <ion-card-header>
-        <ion-card-title>Deal Today {{deal}}</ion-card-title>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        Checkout this amaazing deal
+        {{deal.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
+<div *ngIf="currIndex == 3">
+  <ion-item *ngFor="let deal of wedDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{deal.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
+<div *ngIf="currIndex == 4">
+  <ion-item *ngFor="let deal of thurDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{deal.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
+<div *ngIf="currIndex == 5">
+  <ion-item *ngFor="let deal of friDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{deal.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
+<div *ngIf="currIndex == 6">
+  <ion-item *ngFor="let deal of satDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{deal.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</div>
+<div *ngIf="currIndex == 0">
+  <ion-item *ngFor="let deal of sunDeals">
+    <ion-thumbnail>
+      <img src="https://picsum.photos/100" />
+    </ion-thumbnail>
+    <ion-card style="width: 100%;">
+      <ion-card-header>
+        <ion-card-title>{{deal.title}}</ion-card-title>
+        <ion-card-subtitle *ngIf="deal.allDay === false">{{deal.fromTime}} - {{deal.toTime}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{deal.description}}
       </ion-card-content>
     </ion-card>
   </ion-item>

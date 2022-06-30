@@ -7,8 +7,6 @@ import { Injectable } from '@angular/core';
 export class EstablishmentService {
 
   url = 'http://localhost:4029/';
-  tokenResult: any;
-  canAct: boolean;
   response: any;
   httpOptions;
   constructor(private http: HttpClient) { }

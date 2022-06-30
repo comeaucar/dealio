@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -9,6 +9,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 import { FolderPage } from './folder.page';
 import { DealsPage } from '../deals/deals.page';
 import {SwiperModule} from 'swiper/angular'
+import { AddDealPage } from '../add-deal/add-deal.page';
 
 @NgModule({
   imports: [
@@ -16,8 +17,9 @@ import {SwiperModule} from 'swiper/angular'
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    SwiperModule
+    SwiperModule,
+    ReactiveFormsModule
   ],
-  declarations: [FolderPage, DealsPage]
+  declarations: [FolderPage, DealsPage, AddDealPage]
 })
 export class FolderPageModule {}

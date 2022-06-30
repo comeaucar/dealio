@@ -1,0 +1,93 @@
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Create a new deal</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="dealForm">
+      <ion-item>
+        <ion-label position="stacked">Title</ion-label>
+        <ion-input type="text"
+        required="true"
+        formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea type="text"
+        required="true" formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Deal Type</ion-label>
+        <ion-radio-group style="margin-bottom: 10px" (ionChange)="checkValue($event)">
+          <ion-item *ngFor="let dealType of dealTypes;let i = index">
+            <ion-label>{{dealType}}</ion-label>
+            <ion-radio value="{{i}}" ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item>
+      <div *ngIf="selectedDealType === 'Repeating'">
+      <ion-item>
+        <ion-label position="stacked">Choose Days To Repeat</ion-label>
+        <ion-item *ngFor="let day of days" style="margin-bottom: 10px">
+          <ion-label>{{day}}</ion-label>
+          <ion-checkbox (click)="daySelected(day)"></ion-checkbox>
+        </ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Deal Type</ion-label>
+        <ion-radio-group  style="margin-bottom: 10px" (ionChange)="checkValueTwo($event)">
+          <ion-item *ngFor="let dealTime of dealTimes;let y = index">
+            <ion-label>{{dealTime}}</ion-label>
+            <ion-radio value="{{y}}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item>
+      <div *ngIf="selectedDealTime == 'Between Certain Hours'">
+        <ion-item>
+          <ion-label>From</ion-label>
+          <ion-input formControlName="fromTime" type="number" min="1" max="12"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-radio-group style="margin-bottom: 10px" (ionChange)="checkValueThree($event)">
+            <ion-item *ngFor="let amPm of amPm;let z = index">
+              <ion-label>{{amPm}}</ion-label>
+              <ion-radio value="{{z}}" ></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+        <ion-item>
+          <ion-label>To</ion-label>
+          <ion-input type="number" min="1" max="12" formControlName="toTime"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-radio-group style="margin-bottom: 10px" (ionChange)="checkValueFour($event)">
+            <ion-item *ngFor="let amPm of amPm;let z = index">
+              <ion-label>{{amPm}}</ion-label>
+              <ion-radio value="{{z}}" ></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+      </div>
+    </div>
+      <ion-item *ngIf="selectedDealType === 'Limited'">
+        <ion-label position="stacked">Number Available</ion-label>
+        <ion-input type="number"
+        required="true" formControlName="numberAvailable"></ion-input>
+      </ion-item>
+      <!--<ion-item *ngIf="selectedDealType === 'Time Limit'">
+        <ion-label position="stacked">Choose Start and End Times</ion-label>
+        <ion-input type="text"
+        required="true"></ion-input>
+      </ion-item>-->
+      <ion-item>
+        <ion-label position="stacked">19+ Deal</ion-label>
+        <ion-checkbox
+        required="true" formControlName="adultOnly"></ion-checkbox>
+      </ion-item>
+      <ion-button type="submit" expand="block" (click)="dealSubmit()">Post Deal</ion-button>
+    </form>
+    <ion-spinner *ngIf="loading$ | async" style="display: block; margin: auto;" name="crescent"></ion-spinner>
+  </ion-card-content>
+
+</ion-card>
+

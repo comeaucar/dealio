@@ -70,6 +70,7 @@ export class SignUpPage implements OnInit {
       console.log(this.signUpForm.errors);
     } else {
       try {
+        this.signUpForm.value.userType = "User"
         this.userService.SIGN_UP(this.signUpForm.value).then(async (res) => {
           this.response = res;
           if (this.response === "Bad Request") {

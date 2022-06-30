@@ -10,12 +10,16 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
+      <ion-title *ngIf="folder !== 'AddDeal'" size="large">{{ folder }}</ion-title>
+      <ion-title *ngIf="folder === 'AddDeal'" size="large">Add Deal</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div *ngIf="folder === 'Deals'">
     <app-deals></app-deals>
+  </div>
+  <div *ngIf="folder === 'AddDeal'">
+   <app-add-deal></app-add-deal> 
   </div>
   <div *ngIf="folder === 'Account'">
     

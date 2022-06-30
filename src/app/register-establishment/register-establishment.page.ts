@@ -19,14 +19,14 @@ import { ToastController, AlertController } from '@ionic/angular';
 })
 export class RegisterEstablishmentPage implements OnInit {
   register_est_form: FormGroup;
-  register_account_form: FormGroup
-  submitted = false
-  invalidEmail = false
-  registered = false
-  loading$ = this.loader.loading$
-  response: any
-  estRes: any
-  currUser: any
+  register_account_form: FormGroup;
+  submitted = false;
+  invalidEmail = false;
+  registered = false;
+  loading$ = this.loader.loading$;
+  response: any;
+  estRes: any;
+  currUser: any;
   countries = ['Canada', 'United States'];
   provinces = [
     'Ontario',
@@ -40,7 +40,7 @@ export class RegisterEstablishmentPage implements OnInit {
     'Alberta',
     'Newfoundland & Labrador',
   ];
-  types = ["Restaurant", "Bar", "Nightclub", "Store", "Fast Food"]
+  types = ['Restaurant', 'Bar', 'Nightclub', 'Store', 'Fast Food'];
   constructor(
     public formBuilder: FormBuilder,
     private userService: UserService,
@@ -64,15 +64,23 @@ export class RegisterEstablishmentPage implements OnInit {
     });
 
     this.register_account_form = this.formBuilder.group({
-      email: ['', [
-        Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.pattern('^(?=.*\\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$&])(.{6,})$'),
-      ]],
-    })
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*\\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$&])(.{6,})$'
+          ),
+        ],
+      ],
+    });
   }
 
   get registerEstFormControl() {
@@ -85,85 +93,97 @@ export class RegisterEstablishmentPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: "Account Created",
+      message: 'Account Created',
       duration: 2000,
-      color: "primary"
-    })
-    toast.present()
+      color: 'primary',
+    });
+    toast.present();
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: "Establishment Submitted!",
-      message: "Please allow up to 24 hours for us to approve your submission. Once you are approved you may begin to post deals on Dealio.",
-      buttons: [{
-        text: "Okay",
-        handler: () => {
-            this.router.navigate(['/folder/Deals'])
-        }
-      }]
-    })
+      header: 'Establishment Submitted!',
+      message:
+        'Please allow up to 24 hours for us to approve your submission. Once you are approved you may begin to post deals on Dealio.',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.router.navigate(['/folder/Deals']);
+          },
+        },
+      ],
+    });
 
-    await alert.present()
+    await alert.present();
   }
 
   async registerAccSubmit() {
-    this.submitted = true
+    this.submitted = true;
     if (!this.register_account_form.valid) {
-      console.log("Invalid Form")
-      console.log(this.register_est_form.errors)
+      console.log('Invalid Form');
+      console.log(this.register_est_form.errors);
     } else {
       try {
-        this.submitted = false
-        await this.userService.SIGN_UP(this.register_account_form.value).then(async (res) => {
-          console.log(res)
-          this.response = res
-          if (this.response === "Bad Request") {
-            this.invalidEmail = true
-            return
-          }
-          if (this.response.message === 'User Added') {
-            await Storage.set({
-              key: 'token',
-              value: this.response.jwt,
-            });
-            await Storage.set({
-              key: 'user',
-              value: JSON.stringify(this.response.user),
-            });
-            this.currUser = this.response.user
-            this.presentToast()
-            this.registered = true
-          }
-        })
+        this.submitted = false;
+        this.register_account_form.value.userType = "Manager"
+        await this.userService
+          .SIGN_UP(this.register_account_form.value)
+          .then(async (res) => {
+            console.log(res);
+            this.response = res;
+            if (this.response === 'Bad Request') {
+              this.invalidEmail = true;
+              return;
+            }
+            if (this.response.message === 'User Added') {
+              await Storage.set({
+                key: 'token',
+                value: this.response.jwt,
+              });
+              await Storage.set({
+                key: 'user',
+                value: JSON.stringify(this.response.user),
+              });
+              this.currUser = this.response.user;
+              this.presentToast();
+              this.registered = true;
+            }
+          });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   }
 
   async registerSubmit() {
-    this.submitted = true
+    this.submitted = true;
     if (!this.register_est_form.valid) {
-      console.log("Invalid Form")
-      console.log(this.register_est_form.errors)
+      console.log('Invalid Form');
+      console.log(this.register_est_form.errors);
     } else {
       try {
-        this.register_est_form.value.user = this.currUser._id
-        await this.estService.ADD_EST(this.register_est_form.value).then(async (res) => {
-          console.log(res)
-          this.estRes = res
-          console.log(this.estRes)
-          if (this.estRes === "Bad Request") {
-            console.log("Could not save restaurant")
-            return;
-          }
-          if (this.estRes.message === "Added Successfully") {
-            this.presentAlert()
-          }
-        })
+        this.register_est_form.value.user = this.currUser._id;
+        await this.estService
+          .ADD_EST(this.register_est_form.value)
+          .then(async (res) => {
+            console.log(res);
+            this.estRes = res;
+            console.log(this.estRes);
+            if (this.estRes === 'Bad Request') {
+              console.log('Could not save restaurant');
+              return;
+            }
+            if (this.estRes.message === 'Added Successfully') {
+              await Storage.set({
+                key: "est",
+                value: JSON.stringify(this.estRes.est)
+              })
+              this.presentAlert();
+            }
+          });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   }

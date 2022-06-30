@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'register-establishment',
     loadChildren: () => import('./register-establishment/register-establishment.module').then( m => m.RegisterEstablishmentPageModule)
   },
+  {
+    path: 'folder/AddDeal',
+    loadChildren: () => import('./add-deal/add-deal.module').then(m => m.AddDealPageModule)
+  },
 ];
 
 @NgModule({
