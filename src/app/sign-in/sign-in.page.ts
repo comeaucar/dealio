@@ -76,7 +76,7 @@ export class SignInPage implements OnInit {
               key: 'user',
               value: JSON.stringify(this.userInfo.user),
             });
-            this.router.navigate(['/folder/Deals']);
+            this.router.navigate(['/folder/Deals']).then(() => window.location.reload());
           }
         });
     }

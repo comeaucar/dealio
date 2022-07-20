@@ -109,7 +109,7 @@ export class RegisterEstablishmentPage implements OnInit {
         {
           text: 'Okay',
           handler: () => {
-            this.router.navigate(['/folder/Deals']);
+            this.router.navigate(['/folder/Deals']).then(() => window.location.reload());
           },
         },
       ],
@@ -167,9 +167,7 @@ export class RegisterEstablishmentPage implements OnInit {
         await this.estService
           .ADD_EST(this.register_est_form.value)
           .then(async (res) => {
-            console.log(res);
             this.estRes = res;
-            console.log(this.estRes);
             if (this.estRes === 'Bad Request') {
               console.log('Could not save restaurant');
               return;

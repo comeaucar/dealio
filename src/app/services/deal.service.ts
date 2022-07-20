@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
+import { Storage } from '@capacitor/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import {HttpClient} from '@angular/common/http'
 export class DealService {
 
   url = 'http://localhost:4029/';
-
+  currEst: any
   response: any;
   httpOptions;
   constructor(private http: HttpClient) { }
@@ -15,6 +16,10 @@ export class DealService {
 
   async ADD_DEAL(form) {
     var res;
+    await Storage.get({ key: 'est' }).then((val) => {
+      this.currEst = JSON.parse(val.value)
+    })
+    form.establishment = this.currEst._id
     try {
       var call = this.http.post(`${this.url}deal/add`, form).toPromise()
       res = await call

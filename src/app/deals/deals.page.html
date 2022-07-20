@@ -103,7 +103,8 @@
         <ion-card-subtitle *ngIf="deal.allDay === true">All Day Deal</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        {{deal.description}}
+        {{deal.description}}<br>
+        <ion-chip *ngIf="deal.adultOnly == true" color="danger">19+</ion-chip>
       </ion-card-content>
     </ion-card>
   </ion-item>

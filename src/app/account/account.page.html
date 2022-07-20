@@ -1,0 +1,15 @@
+
+  <div>
+    <ion-card style="height: 100%;">
+      <ion-card-header>
+          <ion-card-title>{{currUser.firstname}} {{currUser.lastname}}</ion-card-title>
+          <ion-card-subtitle>{{currUser.email}}</ion-card-subtitle><br>
+          <ion-card-subtitle>DOB: {{currUser.DOB | date}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+    <ion-button color="warning" expand="block">Forgot Password</ion-button>    
+    <ion-button style="margin-top: 15px;" color="danger" expand="block" (click)="signOut()">Sign out</ion-button>
+  </ion-card-content>
+  </ion-card>
+  </div>
+

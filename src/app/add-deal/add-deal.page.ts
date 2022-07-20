@@ -36,8 +36,8 @@ export class AddDealPage implements OnInit {
   toTime: any;
   loading$ = this.loader.loading$;
   dealForm: FormGroup;
-  selectedDays = Array()
-  response: any
+  selectedDays = Array();
+  response: any;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -56,13 +56,13 @@ export class AddDealPage implements OnInit {
       adultOnly: [false, [Validators.required]],
       fromTime: [''],
       toTime: [''],
-      allDay: ['']
+      allDay: [''],
     });
   }
 
   daySelected(day) {
-    console.log(day + " selected")
-    this.selectedDays.push(day)
+    console.log(day + ' selected');
+    this.selectedDays.push(day);
   }
 
   checkValue(event) {
@@ -86,35 +86,37 @@ export class AddDealPage implements OnInit {
   }
 
   dealSubmit() {
-    this.dealForm.value.dealType = this.selectedDealType
-    if(this.selectedDealType === "Repeating"){
-      this.dealForm.value.daysToRepeat = this.selectedDays
-    } 
-    if (this.selectedDealTime === 'All Day') {
-      this.dealForm.value.allDay = true
-    } else {
-      this.dealForm.value.allDay = false
-      this.dealForm.value.fromTime = this.dealForm.value.fromTime + this.fromTime
-       this.dealForm.value.toTime = this.dealForm.value.toTime + this.toTime
+    this.dealForm.value.dealType = this.selectedDealType;
+    if (this.selectedDealType === 'Repeating') {
+      this.dealForm.value.daysToRepeat = this.selectedDays;
     }
-    console.log(this.dealForm.value)
+
+    if (this.selectedDealTime === 'All Day') {
+      this.dealForm.value.allDay = true;
+    } else {
+      this.dealForm.value.allDay = false;
+      this.dealForm.value.fromTime =
+        this.dealForm.value.fromTime + this.fromTime;
+      this.dealForm.value.toTime = this.dealForm.value.toTime + this.toTime;
+    }
+    console.log(this.dealForm.value);
 
     try {
       this.dealService.ADD_DEAL(this.dealForm.value).then((res) => {
-        console.log(res)
-        this.response = res
+        console.log(res);
+        this.response = res;
         if (this.response.message == 'Deal Added Success') {
-          this.router.navigate(['/folder/Deals'])
+          this.router.navigate(['/folder/Deals']);
         }
-        this.dealForm.reset()
-        this.selectedDealType = null
-        this.selectedDealTime = null
-        this.fromTime= null
-        this.toTime = null
-        this.selectedDays = []
-      })
+        this.dealForm.reset();
+        this.selectedDealType = null;
+        this.selectedDealTime = null;
+        this.fromTime = null;
+        this.toTime = null;
+        this.selectedDays = [];
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 }

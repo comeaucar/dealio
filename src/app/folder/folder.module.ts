@@ -10,6 +10,7 @@ import { FolderPage } from './folder.page';
 import { DealsPage } from '../deals/deals.page';
 import {SwiperModule} from 'swiper/angular'
 import { AddDealPage } from '../add-deal/add-deal.page';
+import { AccountPage } from '../account/account.page';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { AddDealPage } from '../add-deal/add-deal.page';
     SwiperModule,
     ReactiveFormsModule
   ],
-  declarations: [FolderPage, DealsPage, AddDealPage]
+  declarations: [FolderPage, DealsPage, AddDealPage, AccountPage]
 })
 export class FolderPageModule {}

@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'folder/AddDeal',
     loadChildren: () => import('./add-deal/add-deal.module').then(m => m.AddDealPageModule)
   },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
 ];
 
 @NgModule({
